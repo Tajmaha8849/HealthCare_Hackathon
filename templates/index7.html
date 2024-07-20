@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Personalized Medicine Prediction</title>
+    <style>
+       /* General Styles */
+/* General Styles */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #eaeaea; /* Light grey background for contrast */
+    color: #333;
+    margin: 0;
+    padding: 0;
+}
+
+/* Header Styles */
+header {
+    background-color: #6a1b9a; /* Dark Purple */
+    color: white;
+    padding: 1rem 0;
+    text-align: center;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 2.5rem;
+}
+
+/* Navigation Styles */
+nav ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+}
+
+nav ul li {
+    margin: 0 1rem;
+}
+
+nav ul li a {
+    color: white;
+    text-decoration: none;
+    font-size: 1.2rem;
+}
+
+nav ul li a:hover {
+    text-decoration: underline;
+}
+
+/* Section Styles */
+section {
+    margin: 2rem auto;
+    max-width: 800px;
+    padding: 1rem;
+    background-color: white;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+
+/* Section Header Styles */
+section h2 {
+    margin-top: 0;
+    color: #6a1b9a; /* Dark Purple */
+    font-size: 2.5rem; /* Adjust font size as needed */
+    text-align: center;
+}
+
+/* Form Styles */
+form {
+    max-width: 500px;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f5f5f5; /* Light grey background for the form */
+    display: flex;
+    flex-direction: column;
+}
+
+form label {
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+}
+
+form input[type="text"], form select {
+    width: 100%;
+    padding: 12px; /* Increased padding for larger input fields */
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-size: 1rem;
+}
+
+form button {
+    background-color: #6a1b9a; /* Dark Purple */
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.3s ease;
+}
+
+form button:hover {
+    background-color: #8e24aa; /* Lighter Purple for hover effect */
+}
+
+/* Result Styles */
+.result {
+    margin-top: 20px;
+    padding: 20px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    text-align: center;
+}
+
+.result h3 {
+    margin-top: 0;
+    color: #333;
+}
+
+/* Footer Styles */
+footer {
+    text-align: center;
+    padding: 1rem 0;
+    background-color: #6a1b9a; /* Dark Purple */
+    color: white;
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+}
+
+
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Mindful Moments</h1>
+        <nav>
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="/8">HealthVitality</a></li>
+                <li><a href="/4">Remote Patent Monitoring</a></li>
+                <li><a href="/6">HealthOutcome Predictor</a></li>
+                <li><a href="/7">WellGuard AI</a></li>
+                <li><a href="/5">Medical Image Analysis</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section id="home">
+        <h2>Welcome to Mindful Moments</h2>
+        <p>Your companion for better mental health.</p>
+    </section>
+    <section id="wellnessguard-ai">
+        <h2>WellnessGuard AI</h2>
+    </section>
+    <form id="predictionForm">
+        <label for="age">Age:</label>
+        <input type="text" id="age" name="age" required>
+
+        <label for="gender">Gender:</label>
+        <select id="gender" name="gender" required>
+            <option value="M">Male</option>
+            <option value="F">Female</option>
+        </select>
+
+        <label for="ethnicity">Ethnicity:</label>
+        <input type="text" id="ethnicity" name="ethnicity" required>
+
+        <label for="weight">Weight (kg):</label>
+        <input type="text" id="weight" name="weight" required>
+
+        <label for="height">Height (cm):</label>
+        <input type="text" id="height" name="height" required>
+
+        <label for="previous_diagnoses">Previous Diagnoses:</label>
+        <input type="text" id="previous_diagnoses" name="previous_diagnoses" required>
+
+        <label for="family_history">Family History:</label>
+        <input type="text" id="family_history" name="family_history" required>
+
+        <label for="genetic_markers">Genetic Markers:</label>
+        <input type="text" id="genetic_markers" name="genetic_markers" required>
+
+        <label for="current_diagnosis">Current Diagnosis:</label>
+        <input type="text" id="current_diagnosis" name="current_diagnosis" required>
+
+        <label for="vital_signs">Vital Signs:</label>
+        <input type="text" id="vital_signs" name="vital_signs" required>
+
+        <label for="lab_results">Lab Results:</label>
+        <input type="text" id="lab_results" name="lab_results" required>
+
+        <label for="treatment_type">Treatment Type:</label>
+        <input type="text" id="treatment_type" name="treatment_type" required>
+
+        <label for="dosage">Dosage:</label>
+        <input type="text" id="dosage" name="dosage" required>
+
+        <label for="frequency">Frequency:</label>
+        <input type="text" id="frequency" name="frequency" required>
+
+        <label for="duration">Duration:</label>
+        <input type="text" id="duration" name="duration" required>
+
+        <label for="adherence">Adherence:</label>
+        <select id="adherence" name="adherence" required>
+            <option value="Yes">Yes</option>
+            <option value="No">No</option>
+        </select>
+
+        <label for="lifestyle_factors">Lifestyle Factors:</label>
+        <select id="lifestyle_factors" name="lifestyle_factors" required>
+            <option value="Non-smoker">Non-smoker</option>
+            <option value="Smoker">Smoker</option>
+        </select>
+
+        <button type="submit">Predict</button>
+    </form>
+
+    <div class="result" id="resultDiv" style="display: none;">
+        <h3>Prediction Result:</h3>
+        <p id="predictionResult"></p>
+    </div>
+
+    <script>
+        document.getElementById("predictionForm").addEventListener("submit", function(event) {
+            event.preventDefault();
+            var formData = new FormData(this);
+            fetch('/predict7', {
+                method: 'POST',
+                body: JSON.stringify(Object.fromEntries(formData)),
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById("predictionResult").textContent = data.prediction;
+                document.getElementById("resultDiv").style.display = "block";
+            })
+            .catch(error => console.error('Error:', error));
+        });
+    </script>
+</body>
+</html>

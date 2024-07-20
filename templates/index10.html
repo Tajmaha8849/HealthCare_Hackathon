@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Health Chatbot</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f9f9f9;
+      color: #333;
+      margin: 0;
+      padding: 0;
+    }
+    .container {
+      max-width: 600px;
+      margin: 40px auto;
+      padding: 20px;
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      background-color: #fff;
+    }
+    h1 {
+      font-size: 24px;
+      color: #337ab7;
+    }
+    form {
+      display: flex;
+      flex-direction: column;
+    }
+    label {
+      margin-bottom: 10px;
+      font-weight: bold;
+    }
+    textarea {
+      margin-bottom: 20px;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      font-size: 16px;
+    }
+    button[type="submit"] {
+      padding: 10px;
+      background-color: #337ab7;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    button[type="submit"]:hover {
+      background-color: #23527c;
+    }
+    .result {
+      margin-top: 20px;
+      font-size: 18px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Health Chatbot</h1>
+    <form id="symptom-form">
+      <label for="symptoms">Enter your symptoms:</label>
+      <textarea id="symptoms" name="symptoms" rows="4"></textarea>
+      <button type="submit">Get Prediction</button>
+    </form>
+    <div id="result" class="result"></div>
+  </div>
+  <script>
+    document.getElementById('symptom-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const symptoms = document.getElementById('symptoms').value;
+      fetch('/output', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ symptoms }),
+      })
+      .then(response => response.json())
+      .then(data => {
+        console.log(data);
+        if (data.error) {
+          document.getElementById('result').innerHTML = `<p style="color: red;">${data.error}</p>`;
+        } else {
+          document.getElementById('result').innerHTML = `
+            <p><strong>Disease:</strong> ${data.disease}</p>
+            <p><strong>Description:</strong> ${data.description}</p>
+            <p><strong>Solution:</strong> ${data.solution}</p>
+          `;
+        }
+      })
+      .catch((error) => {
+        console.error('Error:', error);
+        document.getElementById('result').innerHTML = `<p style="color: red;">An error occurred</p>`;
+      });
+    });
+  </script>
+</body>
+</html>

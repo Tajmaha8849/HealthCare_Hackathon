@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Diabetes Prediction App</title>
+  <style>
+    /* Global Styles */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      font-family: Arial, sans-serif;
+      font-size: 16px;
+      line-height: 1.5;
+      color: #333;
+      background-color: #f9f9f9;
+    }
+    .container {
+      max-width: 400px;
+      margin: 40px auto;
+      padding: 20px;
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    h1 {
+      margin-top: 0;
+      font-size: 24px;
+      font-weight: bold;
+      color: #337ab7;
+    }
+    /* Form Styles */
+    form {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 20px;
+    }
+    label {
+      margin-bottom: 10px;
+      font-size: 16px;
+      font-weight: bold;
+      color: #666;
+    }
+    input[type="number"] {
+      width: 100%;
+      height: 40px;
+      margin-bottom: 20px;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      font-size: 16px;
+    }
+    input[type="number"]:focus {
+      border-color: #337ab7;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    button[type="submit"] {
+      width: 100%;
+      height: 40px;
+      margin-top: 20px;
+      padding: 10px;
+      border: none;
+      border-radius: 5px;
+      background-color: #337ab7;
+      color: #fff;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    button[type="submit"]:hover {
+      background-color: #23527c;
+    }
+    /* Prediction Result Styles */
+    #prediction-result {
+      margin-top: 20px;
+      font-size: 18px;
+      font-weight: bold;
+      color: #337ab7;
+    }
+    #prediction-result span {
+      color: #666;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Diabetes Prediction App</h1>
+    <form id="prediction-form">
+      <label for="pregnancies">Number of Pregnancies:</label>
+      <input type="number" id="pregnancies" name="pregnancies" placeholder="For male pregnancies = 0"><br><br>
+      <label for="glucose">Glucose Level (mg/dL):</label>
+      <input type="number" id="glucose" name="glucose" placeholder="e.g., 120"><br><br>
+      <label for="diastolic">Diastolic Blood Pressure (mm Hg):</label>
+      <input type="number" id="diastolic" name="diastolic" placeholder="e.g., 80"><br><br>
+      <label for="triceps">Triceps Skinfold Thickness (mm):</label>
+      <input type="number" id="triceps" name="triceps" placeholder="e.g., 20"><br><br>
+      <label for="insulin">2-Hour Serum Insulin (mu U/ml):</label>
+      <input type="number" id="insulin" name="insulin" placeholder="e.g., 85"><br><br>
+      <label for="bmi">Body Mass Index (kg/m²):</label>
+      <input type="number" id="bmi" name="bmi" placeholder="e.g., 28.5" step="0.1"><br><br>
+      <label for="dpf">Diabetes Pedigree Function:</label>
+      <input type="number" id="dpf" name="dpf" placeholder="e.g., 0.627" step="0.001"><br><br>
+      <label for="age">Age (years):</label>
+      <input type="number" id="age" name="age" placeholder="e.g., 45"><br><br>
+      <button type="submit">Make Prediction</button>
+    </form>
+    <div id="prediction-result"></div>
+
+    <script>
+      const form = document.getElementById('prediction-form');
+      form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const data = {
+          pregnancies: parseInt(document.getElementById('pregnancies').value),
+          glucose: parseInt(document.getElementById('glucose').value),
+          diastolic: parseInt(document.getElementById('diastolic').value),
+          triceps: parseInt(document.getElementById('triceps').value),
+          insulin: parseInt(document.getElementById('insulin').value),
+          bmi: parseFloat(document.getElementById('bmi').value),
+          dpf: parseFloat(document.getElementById('dpf').value),
+          age: parseInt(document.getElementById('age').value)
+        };
+        fetch('/outcome', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(data)
+        })
+        .then(response => response.json())
+        .then((data) => {
+          document.getElementById('prediction-result').innerHTML = `Diabetes prediction: ${data.diabetes === 1 ? 'Yes' : 'No'}`;
+        })
+        .catch((error) => {
+          console.error('Error:', error);
+        });
+      });
+    </script>
+  </div>
+</body>
+</html>

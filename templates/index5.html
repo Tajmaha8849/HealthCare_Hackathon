@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Medical Image Analysis</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <style>
+        /* General Styles */
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    margin: 0;
+    background-color: #f4f4f4;
+}
+
+/* Header Styles */
+header {
+    background-color: #007bff;
+    color: white;
+    padding: 1rem 0;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+header h1 {
+    margin: 0;
+    font-size: 2rem;
+}
+
+/* Navigation Styles */
+nav {
+    background-color: #0056b3;
+}
+
+nav ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+}
+
+nav ul li {
+    position: relative;
+}
+
+nav ul li a {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    background-color: white;
+    color: #0056b3;
+    text-decoration: none;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+}
+
+nav ul li a:hover {
+    background-color: #e6e6e6;
+    color: #003d7a;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+}
+
+nav ul li a::after {
+    content: '';
+    position: absolute;
+    right: -10px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 0;
+    height: 0;
+    border-top: 10px solid transparent;
+    border-bottom: 10px solid transparent;
+    border-left: 10px solid white;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+nav ul li a:hover::after {
+    opacity: 1;
+}
+
+/* Container Styles */
+.container {
+    text-align: center;
+    background: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin: 2rem auto;
+    max-width: 600px;
+}
+
+/* Form Styles */
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+form label {
+    margin-bottom: 0.5rem;
+    font-weight: bold;
+}
+
+input[type="file"] {
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+}
+
+button {
+    padding: 10px 20px;
+    font-size: 16px;
+    background: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+button:hover {
+    background: #0056b3;
+}
+
+/* Result Styles */
+#result {
+    margin-top: 20px;
+    font-size: 18px;
+}
+
+.error {
+    color: red;
+    margin-top: 10px;
+}
+
+    </style>
+</head>
+<body>
+    <div>
+    <header>
+        <h1>AI Healthcare Optimization</h1>
+        <nav>
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="/8">HealthVitality</a></li>
+                <li><a href="/4">Remote Patient Monitoring</a></li>
+                <li><a href="/6">Health Outcome Predictor</a></li>
+                <li><a href="/7">WellGuard AI</a></li>
+                <li><a href="/5">Medical Image Analysis</a></li>
+            </ul>
+        </nav>
+    </header>
+</div>
+    <div class="container">
+        <h1>Medical Image Analysis</h1>
+        <form id="uploadForm" enctype="multipart/form-data">
+            <label for="fileInput">Upload an image:</label>
+            <input type="file" name="file" id="fileInput" accept="image/*" required>
+            <button type="submit">Upload and Predict</button>
+            <div id="error" class="error"></div>
+        </form>
+        <div id="result">
+            <p id="prediction"></p>
+            <p id="confidence"></p>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('uploadForm').addEventListener('submit', async function(event) {
+            event.preventDefault();
+
+            const fileInput = document.getElementById('fileInput');
+            const file = fileInput.files[0];
+            if (!file) {
+                alert('Please select a file!');
+                return;
+            }
+
+            const formData = new FormData();
+            formData.append('file', file);
+
+            try {
+                const response = await fetch('/predict5', {
+                    method: 'POST',
+                    body: formData
+                });
+
+                if (!response.ok) {
+                    throw new Error('Prediction request failed');
+                }
+
+                const result = await response.json();
+                document.getElementById('prediction').innerText = `Prediction: ${result.prediction}`;
+                document.getElementById('confidence').innerText = `Confidence: ${result.confidence.toFixed(2)}`;
+            } catch (error) {
+                document.getElementById('error').innerText = `Error: ${error.message}`;
+            }
+        });
+    </script>
+</body>
+</html>

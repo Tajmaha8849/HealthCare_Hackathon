@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Disease Recommendations</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        h1 {
+            text-align: center;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+        label {
+            margin: 10px 0 5px;
+        }
+        input[type="text"], input[type="submit"] {
+            padding: 10px;
+            margin: 10px 0;
+        }
+        .result {
+            margin-top: 20px;
+            padding: 10px;
+            border: 1px solid #ccc;
+        }
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f5f5f5;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #007bff;
+            color: white;
+            padding: 1rem 0;
+            text-align: center;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 2.5rem;
+            font-weight: 300;
+        }
+
+        nav ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+        }
+
+        nav ul li {
+            margin: 0;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-size: 1.2rem;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        nav ul li a:hover {
+            background-color: #0056b3;
+        }
+
+        section {
+            margin: 2rem auto;
+            max-width: 800px;
+            padding: 1rem;
+            background-color: white;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+
+        section h2 {
+            margin-top: 0;
+            color: #007bff;
+            font-weight: 300;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        form label {
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+        }
+
+        form select, form input[type="number"], form button {
+            padding: 0.5rem;
+            margin-bottom: 1rem;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 1rem;
+        }
+
+        form button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        form button:hover {
+            background-color: #0056b3;
+        }
+
+        footer {
+            text-align: center;
+            padding: 1rem 0;
+            background-color: #007bff;
+            color: white;
+            position: fixed;
+            width: 100%;
+            bottom: 0;
+        }
+
+        footer p {
+            margin: 0;
+            font-size: 0.9rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 600px) {
+            nav ul {
+                flex-direction: column;
+                gap: 0;
+            }
+
+            nav ul li a {
+                display: block;
+                width: 100%;
+                text-align: center;
+            }
+        }
+
+        /* Navigation Bar */
+nav {
+    background-color: #007bff;
+    padding: 1rem 0;
+    text-align: center;
+}
+
+nav ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+}
+
+nav ul li {
+    position: relative; /* Required for the arrow positioning */
+}
+
+nav ul li a {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    background-color: white;
+    color: #007bff;
+    text-decoration: none;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+}
+
+nav ul li a:hover {
+    background-color: #e6e6e6;
+    color: #0056b3;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+}
+
+/* Arrow */
+nav ul li a::after {
+    content: '';
+    position: absolute;
+    right: -10px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 0;
+    height: 0;
+    border-top: 10px solid transparent;
+    border-bottom: 10px solid transparent;
+    border-left: 10px solid white;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+nav ul li a:hover::after {
+    opacity: 1;
+}
+
+    </style>
+</head>
+<body>
+    <header>
+        <h1>AI Healthcare Optimization</h1>
+        <nav>
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="/8">HealthVitality</a></li>
+                <li><a href="/4">Remote Patient Monitoring</a></li>
+                <li><a href="/6">Health Outcome Predictor</a></li>
+                <li><a href="/7">WellGuard AI</a></li>
+                <li><a href="/5">Medical Image Analysis</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    
+    <div class="container">
+
+        <h1>HealthVitality</h1>
+        <form id="diseaseForm">
+            <label for="disease">Enter Disease:</label>
+            <input type="text" id="disease" name="disease" required>
+            <input type="submit" value="Get Recommendations">
+        </form>
+        <div class="result" id="result" style="display: none;">
+            <h2>Recommendations:</h2>
+            <p><strong>Health Precautions:</strong> <span id="precautions"></span></p>
+            <p><strong>Dietary Recommendations:</strong> <span id="dietary"></span></p>
+            <p><strong>Exercise Recommendations:</strong> <span id="exercise"></span></p>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('diseaseForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const disease = document.getElementById('disease').value;
+            fetch('/recommend', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ disease: disease })
+            })
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('result').style.display = 'block';
+                document.getElementById('precautions').textContent = data['Health Precautions'];
+                document.getElementById('dietary').textContent = data['Dietary Recommendations'];
+                document.getElementById('exercise').textContent = data['Exercise Recommendations'];
+            })
+            .catch(error => console.error('Error:', error));
+        });
+    </script>
+</body>
+</html>
